@@ -1,0 +1,36 @@
+/**
+ * ----------------------------------------
+ * UV Portfolio
+ * Design Tokens
+ * ----------------------------------------
+ */
+
+:root {
+  /* Colors */
+  --color-bg: #f8f7f4;
+  --color-text: #111111;
+  --color-text-muted: #6e6e6e;
+  --color-border: #d8d8d8;
+
+  /* Layout */
+  --container-width: 1280px;
+  --section-spacing: clamp(5rem, 10vw, 9rem);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  /* Motion */
+  --duration-fast: 180ms;
+  --duration-normal: 320ms;
+  --duration-slow: 600ms;
+
+  /* Typography */
+  --font-sans:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
