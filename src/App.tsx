@@ -5,7 +5,9 @@
  * Author: Yuvaraj P.
  * --------------------------------------------------
  */
-
+import Journey from "./components/journey";
+import About from "./components/about";
+import WhatIBuild from "./components/build";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
 import ScrollIndicator from "./components/common/ScrollIndicator";
@@ -18,7 +20,9 @@ function App() {
       <main className="relative">
 
         <Hero />
-
+        <WhatIBuild />
+        <About />
+        <Journey />
         <ScrollIndicator />
 
       </main>
