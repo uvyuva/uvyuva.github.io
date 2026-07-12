@@ -49,15 +49,17 @@ const Journey = () => {
 
         </FadeIn>
 
-        <Pipeline
-          steps={journeyData}
-          activeIndex={activeIndex}
-          onChange={setActiveIndex}
-        />
+        <div className="journey-flow">
+          <Pipeline
+            steps={journeyData}
+            activeIndex={activeIndex}
+            onChange={setActiveIndex}
+          />
 
-        <JourneyCard
-          step={journeyData[activeIndex]}
-        />
+          <JourneyCard
+            step={journeyData[activeIndex]}
+          />
+        </div>
 
       </Container>
     </section>

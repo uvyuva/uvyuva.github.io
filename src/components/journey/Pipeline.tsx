@@ -1,10 +1,3 @@
-/**
- * --------------------------------------------------
- * UV Portfolio
- * Component: Pipeline
- * --------------------------------------------------
- */
-
 import type { PipelineProps } from "./types";
 
 const Pipeline = ({
@@ -12,71 +5,53 @@ const Pipeline = ({
   activeIndex,
   onChange,
 }: PipelineProps) => {
+  const progress =
+    steps.length > 1
+      ? (activeIndex / (steps.length - 1)) * 100
+      : 0;
+
   return (
-    <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
+    <div className="pipeline-wrapper">
+      <div className="pipeline">
+        <div className="pipeline__glow" />
 
-      {steps.map((step, index) => (
-        <div
-          key={step.year}
-          className="flex flex-1 items-center"
-        >
-          <button
-            onClick={() => onChange(index)}
-            className="
-              group
-              relative
-              z-10
-              flex
-              h-24
-              w-24
-              items-center
-              justify-center
-              rounded-2xl
-              border
-              transition-all
-              duration-300
-            "
+        <div className="pipeline__line">
+          <div
+            className="pipeline__progress"
             style={{
-              borderColor:
-                activeIndex === index
-                  ? "#3B82F6"
-                  : "rgba(255,255,255,.12)",
-
-              background:
-                activeIndex === index
-                  ? "#111827"
-                  : "#111111",
+              width: `${progress}%`,
             }}
-          >
-            <div className="text-center">
-
-              <p className="text-xs tracking-[0.35em] text-white/40">
-                {step.year}
-              </p>
-
-              <p className="mt-2 text-sm font-medium text-white">
-                {step.title.split(" ")[0]}
-              </p>
-
-            </div>
-          </button>
-
-          {index !== steps.length - 1 && (
-            <div className="h-[4px] flex-1 bg-white/10">
-              <div
-                className="h-full bg-blue-500 transition-all duration-500"
-                style={{
-                  width:
-                    activeIndex > index
-                      ? "100%"
-                      : "0%",
-                }}
-              />
-            </div>
-          )}
+          />
         </div>
-      ))}
 
+        <div className="pipeline__steps">
+          {steps.map((step, index) => (
+            <button
+              key={step.year}
+              onClick={() => onChange(index)}
+              className={`pipeline__step ${
+                index === activeIndex ? "active" : ""
+              } ${
+                index < activeIndex ? "completed" : ""
+              }`}
+            >
+              <span className="pipeline__dot">
+                <span className="pipeline__pulse" />
+              </span>
+
+              <span className="pipeline__year">
+                {step.year}
+              </span>
+
+              <span className="pipeline__title">
+                {step.title}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+    
     </div>
   );
 };
