@@ -1,10 +1,3 @@
-/**
- * --------------------------------------------------
- * UV Portfolio
- * Component: Fade In
- * --------------------------------------------------
- */
-
 import { motion } from "framer-motion";
 import type { FadeInProps } from "./types";
 
@@ -15,15 +8,10 @@ const FadeIn = ({
   x = 0,
   y = 30,
   className,
-  style,
-  as = "div",
 }: FadeInProps) => {
-  const MotionComponent = motion.create(as);
-
   return (
-    <MotionComponent
+    <motion.div
       className={className}
-      style={style}
       initial={{
         opacity: 0,
         x,
@@ -36,8 +24,7 @@ const FadeIn = ({
       }}
       viewport={{
         once: true,
-        margin: "50px",
-        amount: 0,
+        amount: 0.15,
       }}
       transition={{
         delay,
@@ -46,7 +33,7 @@ const FadeIn = ({
       }}
     >
       {children}
-    </MotionComponent>
+    </motion.div>
   );
 };
 

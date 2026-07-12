@@ -1,4 +1,8 @@
-import type { CSSProperties, ReactNode } from "react";
+import type {
+  CSSProperties,
+  ReactNode,
+  ElementType,
+} from "react";
 
 export interface JourneyStep {
   year: string;
@@ -26,5 +30,5 @@ export interface FadeInProps {
   y?: number;
   className?: string;
   style?: CSSProperties;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }

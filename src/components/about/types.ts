@@ -1,12 +1,18 @@
+import type {
+  CSSProperties,
+  ElementType,
+  ReactNode,
+} from "react";
+
 export interface FadeInProps {
-  children: React.ReactNode;
+  children: ReactNode;
   delay?: number;
   duration?: number;
   x?: number;
   y?: number;
   className?: string;
-  style?: React.CSSProperties;
-  as?: keyof JSX.IntrinsicElements;
+  style?: CSSProperties;
+  as?: ElementType;
 }
 
 export interface AnimatedTextProps {

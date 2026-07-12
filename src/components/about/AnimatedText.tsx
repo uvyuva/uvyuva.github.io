@@ -37,7 +37,7 @@ const AnimatedText = ({ text }: AnimatedTextProps) => {
         leading-relaxed
       "
     >
-      {characters.map((char, index) => {
+      {characters.map((char: string, index: number) => {
         const progress = index / characters.length;
 
         const start = Math.max(0, progress - 0.1);
