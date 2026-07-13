@@ -12,7 +12,7 @@ export const buildData: BuildData[] = [
       "AWS",
       "Glue",
       "Lambda",
-      "Athena",
+      "Airflow",
       "Python",
     ],
     mediaType: "cloud",
@@ -28,8 +28,6 @@ export const buildData: BuildData[] = [
     technologies: [
       "OpenAI",
       "Python",
-      "React",
-      "TypeScript",
     ],
     mediaType: "ai",
   },
