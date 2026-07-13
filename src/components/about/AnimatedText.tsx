@@ -9,7 +9,6 @@ import { useRef } from "react";
 import {
   motion,
   useScroll,
-  useTransform,
 } from "framer-motion";
 
 import type { AnimatedTextProps } from "./types";
@@ -25,8 +24,9 @@ const AnimatedText = ({ text }: AnimatedTextProps) => {
   const characters = text.split("");
 
   return (
-    <p
+    <motion.p
       ref={containerRef}
+      style={{ opacity: scrollYProgress }}
       className="
         mx-auto
         max-w-[640px]
@@ -37,37 +37,12 @@ const AnimatedText = ({ text }: AnimatedTextProps) => {
         leading-relaxed
       "
     >
-      {characters.map((char: string, index: number) => {
-        const progress = index / characters.length;
-
-        const start = Math.max(0, progress - 0.1);
-        const end = Math.min(1, progress + 0.05);
-
-        const opacity = useTransform(
-          scrollYProgress,
-          [start, end],
-          [0.2, 1]
-        );
-
-        return (
-          <span
-            key={index}
-            className="relative inline-block"
-          >
-            <span className="invisible">
-              {char === " " ? "\u00A0" : char}
-            </span>
-
-            <motion.span
-              style={{ opacity }}
-              className="absolute left-0 top-0"
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          </span>
-        );
-      })}
-    </p>
+      {characters.map((char, index) => (
+        <span key={index}>
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </motion.p>
   );
 };
 

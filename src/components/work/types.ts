@@ -1,12 +1,11 @@
-export interface WorkCardProps {
-  category: string;
+export interface Project {
+  id: number;
+  badge: string;
   title: string;
-  description?: string;
-  gradient?: boolean;
-  className?: string;
-}
-
-export interface WorkVideoCardProps {
-  videoUrl: string;
-  className?: string;
+  tagline: string;
+  description: string;
+  technologies: string[];
+  architecture: string[];
+  metrics?: { value?: string; label: string }[];
+  liveUrl?: string;
 }

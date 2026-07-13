@@ -1,70 +1,45 @@
-/**
- * --------------------------------------------------
- * UV Portfolio
- * Component: Work Section
- * --------------------------------------------------
- */
-
-import Container from "../common/Container";
-import WorkCard from "./WorkCard";
-import WorkVideoCard from "./WorkVideoCard";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { projects } from "../../data/projects";
+import ProjectCard from "./ProjectCard";
+import "./styles.css";
 
 const Work = () => {
+  const [activeProject, setActiveProject] = useState(0);
+
   return (
-    <section
-      id="work"
-      className="relative overflow-hidden bg-black py-36"
-    >
-      {/* Background Glow */}
+    <section id="work" className="work-section">
+      <div className="work-container">
+        <header className="work-header">
+          <p className="work-eyebrow">Selected Work</p>
+          <h2 className="work-heading">Building systems that ship.</h2>
+        </header>
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_60%)]" />
+        <nav className="project-nav">
+          {projects.map((project, index) => (
+            <button
+              key={project.id}
+              type="button"
+              onClick={() => setActiveProject(index)}
+              className={`project-nav-item ${
+                activeProject === index ? "active" : ""
+              }`}
+            >
+              {project.title}
+              {activeProject === index && (
+                <motion.span layoutId="nav-underline" className="nav-underline" />
+              )}
+            </button>
+          ))}
+        </nav>
 
-      <Container className="relative z-10 max-w-[1500px]">
-
-        {/* Heading */}
-
-        <div className="mx-auto mb-28 max-w-4xl text-center">
-
-          <p className="mb-5 text-xs uppercase tracking-[0.45em] text-neutral-500">
-            SELECTED WORK
-          </p>
-
-          <h2
-            className="text-5xl font-light leading-[0.9] text-white md:text-6xl lg:text-8xl"
-            style={{ letterSpacing: "-0.04em" }}
-          >
-            Three projects.
-            <br />
-            One engineering mindset.
-          </h2>
-
-        </div>
-
-        {/* Cards */}
-
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-
-          <WorkCard
-            category="Cloud Engineering"
-            title="AWS Migration Platform"
-            description="Migrated enterprise datasets from on-premise infrastructure to AWS using Glue, S3, Lambda and Athena while building scalable ETL pipelines and automated validation workflows."
-            gradient
+        <AnimatePresence mode="wait">
+          <ProjectCard
+            key={projects[activeProject].id}
+            project={projects[activeProject]}
           />
-
-          <WorkVideoCard
-            videoUrl="/videos/portfolio.mp4"
-          />
-
-          <WorkCard
-            category="Generative AI"
-            title="AI Resume Assistant"
-            description="Designed AI-powered workflows using modern LLM APIs, prompt engineering and cloud integrations to generate resumes, portfolios and personalized career content."
-          />
-
-        </div>
-
-      </Container>
-
+        </AnimatePresence>
+      </div>
     </section>
   );
 };
