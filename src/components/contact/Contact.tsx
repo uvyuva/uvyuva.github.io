@@ -122,7 +122,7 @@ const Contact = () => {
               </label>
             </div>
             <button type="submit" className="form-submit">
-              Send message ↗
+              Get In Touch ↗
             </button>
           </form>
         </div>

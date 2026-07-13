@@ -1,160 +1,107 @@
-/* Journey styles */
-.pipeline{
-    position:relative;
-    width:100%;
-    margin:7rem auto 4rem;
-    padding:3rem 0;
+
+/* Journey — vertical timeline */
+.timeline {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
-.pipeline__line{
-    position:absolute;
-    top:38px;
-    left:0;
-    width:100%;
-    height:4px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-    overflow:hidden;
+/* continuous connecting line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.pipeline__progress{
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        #ffffff,
-        rgba(255,255,255,.85)
-    );
-    border-radius:999px;
-    transition:width .8s cubic-bezier(.22,1,.36,1);
+.timeline-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 28px;
+  padding-bottom: 56px;
 }
 
-.pipeline__steps{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-position:relative;
-z-index:2;
+.timeline-item:last-child {
+  padding-bottom: 0;
 }
 
-.pipeline__step{
-    background:none;
-    border:none;
-    color:#666;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:.7rem;
-    transition:.35s;
+/* dot sits on the line, ring masks the line behind it */
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  margin-top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px #050505, 0 0 16px rgba(59, 130, 246, 0.6);
 }
 
-.pipeline__connector{
-    position:absolute;
-    top:40px;
-    width:2px;
-    height:70px;
-    background:linear-gradient(
-        to bottom,
-        rgba(255,255,255,.9),
-        transparent
-    );
-    transform:translateX(-50%);
-    transition:
-        left .8s cubic-bezier(.22,1,.36,1),
-        height .4s;
-    z-index:1;
+.timeline-content {
+  padding-bottom: 4px;
 }
 
-
-
-.pipeline-svg{
-    position:absolute;
-    top:42px;
-    left:0;
-    width:2px;
-    pointer-events:none;
-    z-index:1;
+.timeline-year {
+  display: block;
+  color: #3b82f6;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.pipeline-wrapper{
-    position:relative;
+.timeline-title {
+  color: #fff;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 6px;
 }
 
-.journey-flow{
-    position:relative;
+.timeline-subtitle {
+  color: #9aa4b0;
+  font-size: 16px;
+  margin: 0 0 18px;
 }
 
-.pipeline__dot{
-    position:relative;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#111;
-    border:2px solid #444;
-    transition:.45s;
+.timeline-desc {
+  color: #7b8794;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 52ch;
+  margin: 0 0 20px;
 }
 
-.pipeline__pulse{
-    position:absolute;
-    inset:-10px;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
-    opacity:0;
-    transition:.4s;
+.timeline-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.pipeline__step.completed .pipeline__dot{
-    background:#fff;
-    border-color:#fff;
+.timeline-chip {
+  color: #cbd2d9;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
 
-.pipeline__step.active .pipeline__dot{
-    width:24px;
-    height:24px;
-    background:#fff;
-    border-color:#fff;
-    box-shadow:
-        0 0 18px rgba(255,255,255,.6),
-        0 0 45px rgba(255,255,255,.25);
+.timeline-chip:hover {
+  color: #fff;
+  border-color: rgba(59, 130, 246, 0.45);
 }
 
-.pipeline__step.active .pipeline__pulse{
-    opacity:1;
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-
-0%{
-transform:scale(.7);
-opacity:.45;
-}
-
-70%{
-transform:scale(1.8);
-opacity:0;
-}
-
-100%{
-opacity:0;
-}
-
-}
-
-.pipeline__year{
-    letter-spacing:.35em;
-    font-size:.72rem;
-}
-
-.pipeline__title{
-    font-size:.9rem;
-}
-
-.pipeline__step.active{
-    color:#fff;
-    transform:translateY(-8px);
-}
-
-.pipeline__step:hover{
-    color:#fff;
+/* Responsive */
+@media (max-width: 560px) {
+  .timeline-item {
+    column-gap: 18px;
+  }
 }

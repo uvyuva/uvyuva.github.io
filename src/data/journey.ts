@@ -35,7 +35,7 @@ export const journeyData: JourneyStep[] = [
   },
 
   {
-    year: "2025",
+    year: "2026",
     title: "Generative AI",
     subtitle: "Intelligent Systems",
 

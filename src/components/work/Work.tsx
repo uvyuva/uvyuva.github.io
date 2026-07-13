@@ -1,44 +1,116 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { projects } from "../../data/projects";
-import ProjectCard from "./ProjectCard";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { projects, type Project } from "../../data/projects";
+import ProjectArchitecture from "./ProjectArchitecture";
 import "./styles.css";
 
+interface StickyCardProps {
+  project: Project;
+  index: number;
+  progress: MotionValue<number>;
+  range: [number, number];
+  targetScale: number;
+}
+
+const StickyCard = ({
+  project,
+  index,
+  progress,
+  range,
+  targetScale,
+}: StickyCardProps) => {
+  const scale = useTransform(progress, range, [1, targetScale]);
+
+  return (
+    <div className="work-sticky">
+      <motion.article
+        className="work-card"
+        style={{ scale, top: `calc(-5vh + ${index * 26}px)` }}
+      >
+        <div className="work-card-head">
+          <div className="work-card-headleft">
+            <span className="work-num">0{index + 1}</span>
+            <div>
+              <span className="work-cat">{project.badge}</span>
+              <h3 className="work-title">{project.title}</h3>
+            </div>
+          </div>
+
+          {project.liveUrl && (
+            <a
+              className="live-btn"
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live Project ↗
+            </a>
+          )}
+        </div>
+
+        <div className="work-card-body">
+          <div className="work-card-info">
+            <p className="work-tagline">{project.tagline}</p>
+            <p className="work-desc">{project.description}</p>
+
+            <ul className="work-tech">
+              {project.technologies.map((tech) => (
+                <li key={tech} className="tech-chip">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+
+            {project.metrics && (
+              <div className="work-metrics">
+                {project.metrics.map((m) => (
+                  <div key={m.label} className="metric">
+                    {m.value && <span className="metric-value">{m.value}</span>}
+                    <span className="metric-label">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="work-card-visual">
+            <ProjectArchitecture nodes={project.architecture} />
+          </div>
+        </div>
+      </motion.article>
+    </div>
+  );
+};
+
 const Work = () => {
-  const [activeProject, setActiveProject] = useState(0);
+  const container = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <section id="work" className="work-section">
-      <div className="work-container">
-        <header className="work-header">
-          <p className="work-eyebrow">Selected Work</p>
-          <h2 className="work-heading">Building systems that ship.</h2>
-        </header>
+      <div className="work-header">
+        <p className="work-eyebrow">Selected Work</p>
+        <h2 className="work-heading">Systems built to ship.</h2>
+      </div>
 
-        <nav className="project-nav">
-          {projects.map((project, index) => (
-            <button
+      <div className="work-cards" ref={container}>
+        {projects.map((project, i) => {
+          const targetScale = 1 - (projects.length - 1 - i) * 0.05;
+          const range: [number, number] = [i * (1 / projects.length), 1];
+          return (
+            <StickyCard
               key={project.id}
-              type="button"
-              onClick={() => setActiveProject(index)}
-              className={`project-nav-item ${
-                activeProject === index ? "active" : ""
-              }`}
-            >
-              {project.title}
-              {activeProject === index && (
-                <motion.span layoutId="nav-underline" className="nav-underline" />
-              )}
-            </button>
-          ))}
-        </nav>
-
-        <AnimatePresence mode="wait">
-          <ProjectCard
-            key={projects[activeProject].id}
-            project={projects[activeProject]}
-          />
-        </AnimatePresence>
+              project={project}
+              index={i}
+              progress={scrollYProgress}
+              range={range}
+              targetScale={targetScale}
+            />
+          );
+        })}
       </div>
     </section>
   );
