@@ -1,4 +1,14 @@
-import type { Project } from "./projects";
+export interface Project {
+  id: number;
+  badge: string;
+  title: string;
+  tagline: string;
+  description: string;
+  technologies: string[];
+  architecture: string[];
+  metrics?: { value?: string; label: string }[];
+  liveUrl?: string;
+}
 
 export const projects: Project[] = [
   {
@@ -47,14 +57,14 @@ export const projects: Project[] = [
   },
   {
     id: 4,
-    badge: "Freelance Client Website",
+    badge: "Client Website",
     title: "SpindleCraft Website",
     tagline: "A production marketing website for Yajamana Automation.",
     description:
       "A responsive marketing site delivered for a client, built on a lightweight front-end stack and shipped live.",
     technologies: ["HTML", "CSS", "Bootstrap", "JavaScript", "jQuery"],
     architecture: ["Design", "HTML / CSS", "Bootstrap UI", "jQuery", "Live Site"],
-    
+    metrics: [{ label: "Live" }, { label: "Responsive" }],
     liveUrl: "https://spindlecraft.in/",
   },
 ];
