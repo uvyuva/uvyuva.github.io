@@ -5,7 +5,7 @@
  * --------------------------------------------------
  */
 
-import type { BuildCardProps } from "./types";
+import type { BuildCardProps } from "./types"; // if you used Rule B
 
 /* per-category accent, drawn from the site palette (blue / gold / green) */
 const ACCENTS = {

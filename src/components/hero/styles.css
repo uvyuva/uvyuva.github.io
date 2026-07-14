@@ -81,10 +81,47 @@
   margin: 0 0 28px;
 }
 
+/* shimmer heading (gradient sweeps once on load) */
+/* RollingText heading */
 .hero-title {
   color: #fff;
   margin: 0 auto;
   max-width: 16ch;
+  line-height: 1.05;
+}
+
+.hero-title .roll-word {
+  display: inline-block;
+}
+
+.hero-title .roll-char {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;   /* room so descenders (g, y) aren't clipped by the mask */
+  margin-bottom: -0.14em;
+}
+
+/* rotating word — gold accent so it always pops */
+
+/* gold separators in the eyebrow */
+.hero-eyebrow .dot {
+  color: #f5c542;
+  margin: 0 4px;
+}
+
+
+.hero-rotate {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.hero-rotate-word {
+  display: inline-block;
+  color: #f5c542;
 }
 
 .hero-subtitle {

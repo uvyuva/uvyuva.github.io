@@ -1,0 +1,13 @@
+
+
+.rolling-word {
+  display: inline-block;
+}
+
+.rolling-char {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}

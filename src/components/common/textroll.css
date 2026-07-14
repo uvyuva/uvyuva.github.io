@@ -1,0 +1,41 @@
+
+.textroll {
+  display: inline-flex;
+}
+
+.textroll-char {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.textroll-face {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.textroll-face--under {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+}
+
+.textroll:hover .textroll-face {
+  transform: translateY(-100%);
+}
+
+.textroll:hover .textroll-face--under {
+  transform: translateY(0);
+}
+
+/* also trigger when the surrounding link/button is hovered (whole button area) */
+a:hover .textroll-face,
+button:hover .textroll-face {
+  transform: translateY(-100%);
+}
+
+a:hover .textroll-face--under,
+button:hover .textroll-face--under {
+  transform: translateY(0);
+}

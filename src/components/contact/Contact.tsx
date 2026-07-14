@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import "./styles.css";
+import TextRoll from "../common/TextRoll";       // if you used Rule A
+import RollingText from "../common/RollingText";
 
 /* ── Edit your details here ─────────────────────────── */
 const CONTACT = {
@@ -65,7 +67,7 @@ const Contact = () => {
         >
           <div className="contact-intro">
             <h2 className="contact-heading">
-              contact<span className="dot">.</span>
+              <RollingText text="contact" /><span className="dot">.</span>
             </h2>
             <p className="contact-subtext">
               Get in touch with me via social media
@@ -99,7 +101,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="contact-form-wrap">
-          <h3 className="form-title">Need Work Done. Fill It Out</h3>
+          <h3 className="form-title"><RollingText text="Need Work Done. Fill It Out" /></h3>
           <form
             className="contact-form"
             action={`https://formspree.io/f/${CONTACT.formspreeId}`}
@@ -122,7 +124,7 @@ const Contact = () => {
               </label>
             </div>
             <button type="submit" className="form-submit">
-              Get In Touch ↗
+              <TextRoll text="Get In Touch ↗" />
             </button>
           </form>
         </div>

@@ -78,16 +78,14 @@ const Pet = () => {
 
   /* only cycle the legs while moving; settle on a standing frame when idle */
   useEffect(() => {
-    if (!moving) {
-      setFrame(0);
-      return;
-    }
+    if (!moving) return; // don't setState here — just stop cycling
     const id = setInterval(
       () => setFrame((f) => (f + 1) % PET_FRAMES.length),
       1000 / PET_FPS
     );
     return () => clearInterval(id);
   }, [moving]);
+const shown = moving ? frame : 0;
 
   return (
     <div ref={ref} className="about-pet-track">
@@ -108,7 +106,7 @@ const Pet = () => {
             alt=""
             aria-hidden="true"
             className="about-pet-frame"
-            style={{ opacity: i === frame ? 1 : 0 }}
+            style={{ opacity: i === shown ? 1 : 0 }}
           />
         ))}
       </motion.div>

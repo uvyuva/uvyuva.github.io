@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, type MotionValue } from "framer-motion
 import { projects, type Project } from "../../data/projects";
 import ProjectArchitecture from "./ProjectArchitecture";
 import "./styles.css";
+import TextRoll from "../common/TextRoll";       // if you used Rule A
+import RollingText from "../common/RollingText";  // if you used Rule B
 
 interface StickyCardProps {
   project: Project;
@@ -37,14 +39,9 @@ const StickyCard = ({
           </div>
 
           {project.liveUrl && (
-            <a
-              className="live-btn"
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Live Project ↗
-            </a>
+           <a className="live-btn" href={project.liveUrl} target="_blank" rel="noreferrer">
+              <TextRoll text="Live Project ↗" />
+          </a>
           )}
         </div>
 
@@ -93,7 +90,10 @@ const Work = () => {
     <section id="work" className="work-section">
       <div className="work-header">
         <p className="work-eyebrow">Selected Work</p>
-        <h2 className="work-heading">Systems built to Ship</h2>
+        
+        <h2 className="work-heading">
+           <RollingText text="Systems built to Ship" />
+        </h2>
       </div>
 
       <div className="work-cards" ref={container}>

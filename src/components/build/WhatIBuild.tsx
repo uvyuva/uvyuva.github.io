@@ -8,6 +8,8 @@
 import Container from "../common/Container";
 import { buildData } from "../../data/build";
 import BuildCard from "./BuildCard";
+import RollingText from "../common/RollingText";  // if you used Rule B
+
 
 const WhatIBuild = () => {
   return (
@@ -24,11 +26,11 @@ const WhatIBuild = () => {
             className="text-4xl font-light leading-[0.95] text-white md:text-5xl lg:text-6xl"
             style={{ letterSpacing: "-0.04em" }}
           >
-            From scalable cloud data
+            <RollingText text="From scalable cloud data" />
             <br />
-            platforms to intelligent AI
+            <RollingText text="platforms to intelligent AI" />
             <br />
-            experiences.
+            <RollingText text="experiences." />
           </h2>
 
           <p className="mx-auto mt-8 max-w-2xl text-[17px] leading-8 text-white/55">
