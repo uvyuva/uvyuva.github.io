@@ -17,22 +17,18 @@
 }
 
 .skills-eyebrow {
-  color: #7b8794;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
+  color: #737373;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
-  margin: 0 0 20px;
+  margin: 0 0 22px;
 }
 
 .skills-heading {
   color: #fff;
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
   margin: 0 auto;
-  max-width: 16ch;
+  max-width: 18ch;
 }
 
 /* Grid of categories */

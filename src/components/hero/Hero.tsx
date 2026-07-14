@@ -5,64 +5,86 @@
  * --------------------------------------------------
  */
 
-import Button from "../common/Button";
-import Container from "../common/Container";
-import UVIdentity from "./UVIdentity";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import "./styles.css";
 
 const Hero = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  /* cursor-follow spotlight — sets CSS vars directly (no re-render) */
+  const handleMove = (e: React.MouseEvent) => {
+    const el = heroRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
-    <section className="flex min-h-[100svh] items-center overflow-hidden pt-24">
-      <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+    <section ref={heroRef} id="hero" className="hero" onMouseMove={handleMove}>
+      {/* aurora glow */}
+      <div className="hero-glow">
+        <motion.span
+          className="hero-blob hero-blob-blue"
+          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.span
+          className="hero-blob hero-blob-gold"
+          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-          {/* Left */}
+      {/* cursor spotlight */}
+      <div className="hero-spotlight" />
 
-          <div>
+      <div className="hero-inner">
+        <motion.p
+          className="hero-eyebrow"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          AWS Data Engineer <span className="dot">·</span> Generative AI{" "}
+          <span className="dot">·</span> Web Developer
+        </motion.p>
 
-            <p className="mb-8 text-xs uppercase tracking-[0.38em] text-neutral-500">
-              AWS DATA ENGINEER · GENERATIVE AI · WEB DEVELOPER
-            </p>
+        <motion.h1
+          className="hero-title"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          Building intelligent data experiences.
+        </motion.h1>
 
-            <h1 className="max-w-[15ch] text-[clamp(4rem,7vw,6.8rem)] font-black leading-[0.92] tracking-tight">
-              Building intelligent
-              <br />
-              data experiences.
-            </h1>
+        <motion.p
+          className="hero-subtitle"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+        >
+          I design scalable cloud-native platforms, AI-powered solutions and
+          modern web applications focused on performance, reliability and
+          thoughtful engineering.
+        </motion.p>
 
-            <p className="mt-10 max-w-lg text-lg leading-8 text-neutral-600">
-              I design scalable cloud-native platforms,
-              AI-powered solutions and modern web
-              applications focused on performance,
-              reliability and thoughtful engineering.
-            </p>
-
-            <div className="mt-14 flex flex-wrap gap-6">
-
-              <Button href="#work">
-                Selected Work
-              </Button>
-
-              <Button
-                href="#contact"
-                variant="secondary"
-              >
-                Let's Connect
-              </Button>
-
-            </div>
-
-          </div>
-
-          {/* Right */}
-
-          <div className="flex justify-center lg:justify-end">
-
-            <UVIdentity />
-
-          </div>
-
-        </div>
-      </Container>
+        <motion.div
+          className="hero-cta-row"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <a href="#work" className="hero-btn hero-btn-primary">
+            Selected Work →
+          </a>
+          <a href="#contact" className="hero-btn hero-btn-ghost">
+            Let's Connect →
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 };

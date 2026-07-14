@@ -1,3 +1,4 @@
+
 export interface BuildData {
   id: number;
   category: string;
@@ -10,8 +11,4 @@ export interface BuildData {
 
 export interface BuildCardProps {
   item: BuildData;
-}
-
-export interface BuildMediaProps {
-  mediaType: BuildData["mediaType"];
 }

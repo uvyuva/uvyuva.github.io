@@ -4,29 +4,16 @@
  * ----------------------------------------
  */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
 }
 
-h1 {
-  font-size: clamp(3.5rem, 9vw, 7rem);
-}
-
-h2 {
-  font-size: clamp(2.6rem, 6vw, 5rem);
-}
-
-h3 {
-  font-size: clamp(2rem, 5vw, 3rem);
-}
+h1 { font-size: clamp(3.5rem, 9vw, 7rem); }
+h2 { font-size: clamp(2.6rem, 6vw, 5rem); }
+h3 { font-size: clamp(2rem, 5vw, 3rem); }
 
 p {
   margin: 0;
@@ -37,6 +24,6 @@ p {
 }
 
 small {
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }

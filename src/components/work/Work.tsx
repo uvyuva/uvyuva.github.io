@@ -93,7 +93,7 @@ const Work = () => {
     <section id="work" className="work-section">
       <div className="work-header">
         <p className="work-eyebrow">Selected Work</p>
-        <h2 className="work-heading">Systems built to ship.</h2>
+        <h2 className="work-heading">Systems built to Ship</h2>
       </div>
 
       <div className="work-cards" ref={container}>
