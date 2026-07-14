@@ -1,6 +1,87 @@
-.hero-heading{
-    background: linear-gradient(180deg,#646973 0%,#BBCCD7 100%);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
+
+.about-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #050505;
+  padding: clamp(80px, 12vh, 140px) 24px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.about-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(32px, 6vh, 60px);
+}
+
+/* silver gradient heading — neutral, matches dark theme (no purple) */
+.about-heading {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 150px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  background: linear-gradient(180deg, #8b93a0 0%, #e8eef3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-text {
+  max-width: 640px;
+  margin: 0;
+  color: #d7e2ea;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.9vw, 1.3rem);
+  line-height: 1.85;
+  word-spacing: 0.02em;
+}
+
+/* CTA — themed blue, no purple */
+.about-cta {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 34px;
+  border-radius: 999px;
+  background: linear-gradient(123deg, #1e3a8a 0%, #3b82f6 70%, #60a5fa 100%);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.about-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 38px rgba(59, 130, 246, 0.45);
+}
+
+/* Pet — runs along the bottom, driven by scroll */
+.about-pet {
+  position: absolute;
+  bottom: 0;
+  width: clamp(120px, 15vw, 190px);
+  height: auto;
+}
+
+.about-pet-frame {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* stacked frames overlay the first one, which sizes the box */
+.about-pet-frame:not(:first-child) {
+  position: absolute;
+  inset: 0;
 }

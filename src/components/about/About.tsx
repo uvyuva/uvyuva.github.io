@@ -1,152 +1,150 @@
-/**
- * --------------------------------------------------
- * UV Portfolio
- * Component: About
- * --------------------------------------------------
- */
-
-import { motion } from "framer-motion";
-
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import "./styles.css";
 
-import FadeIn from "./FadeIn";
-import AnimatedText from "./AnimatedText";
-import { aboutContent } from "../../data/about";
+const ABOUT_TEXT =
+  "I enjoy building systems that solve real problems — from scalable AWS data platforms to AI-powered applications and modern web experiences. I believe great software is not just functional, but intuitive, reliable and thoughtfully engineered. Every project is an opportunity to simplify complexity, automate repetitive work and create experiences that people genuinely enjoy using.";
+
+/* one character — its own component so useTransform is a top-level hook */
+const Char = ({
+  char,
+  progress,
+  range,
+}: {
+  char: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}) => {
+  const opacity = useTransform(progress, range, [0.12, 1]);
+  return <motion.span style={{ opacity }}>{char}</motion.span>;
+};
+
+const AnimatedText = ({ text }: { text: string }) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.85", "end 0.4"],
+  });
+
+  const chars = text.split("");
+  return (
+    <p ref={ref} className="about-text">
+      {chars.map((c, i) => {
+        const start = i / chars.length;
+        const end = start + 1 / chars.length;
+        return (
+          <Char key={i} char={c} progress={scrollYProgress} range={[start, end]} />
+        );
+      })}
+    </p>
+  );
+};
+
+
+/* walk-cycle frames — save as transparent PNGs in /public/pet/ */
+const PET_FRAMES = [
+  "/pet/walk-1.png",
+  "/pet/walk-2.png",
+  "/pet/walk-3.png",
+  "/pet/walk-4.png",
+];
+const PET_FPS = 8; // frames per second of the walk cycle
+
+const Pet = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const left = useTransform(scrollYProgress, [0, 1], ["2%", "88%"]);
+
+  const [frame, setFrame] = useState(0);
+  const [moving, setMoving] = useState(false);
+
+  /* mark "moving" while scrolling, then stop shortly after scroll ends */
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      setMoving(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setMoving(false), 150);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  /* only cycle the legs while moving; settle on a standing frame when idle */
+  useEffect(() => {
+    if (!moving) {
+      setFrame(0);
+      return;
+    }
+    const id = setInterval(
+      () => setFrame((f) => (f + 1) % PET_FRAMES.length),
+      1000 / PET_FPS
+    );
+    return () => clearInterval(id);
+  }, [moving]);
+
+  return (
+    <div ref={ref} className="about-pet-track">
+      <motion.div
+        className="about-pet"
+        style={{ left }}
+        animate={moving ? { y: [0, -8, 0] } : { y: 0 }}
+        transition={
+          moving
+            ? { duration: 0.7, repeat: Infinity, ease: "easeInOut" }
+            : { duration: 0.3 }
+        }
+      >
+        {PET_FRAMES.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt=""
+            aria-hidden="true"
+            className="about-pet-frame"
+            style={{ opacity: i === frame ? 1 : 0 }}
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0C0C0C] px-5 py-20 sm:px-8 md:px-10"
-    >
-      {/* Top Left */}
-
-      <FadeIn
-        delay={0.1}
-        x={-80}
-        y={0}
-        duration={0.9}
-        className="absolute left-[1%] top-[4%] z-0 sm:left-[2%] md:left-[4%]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
-          alt=""
-          className="h-auto w-[120px] sm:w-[160px] md:w-[210px]"
-        />
-      </FadeIn>
-
-      {/* Bottom Left */}
-
-      <FadeIn
-        delay={0.25}
-        x={-80}
-        y={0}
-        duration={0.9}
-        className="absolute bottom-[8%] left-[3%] z-0 sm:left-[6%] md:left-[10%]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
-          alt=""
-          className="h-auto w-[100px] sm:w-[140px] md:w-[180px]"
-        />
-      </FadeIn>
-
-      {/* Top Right */}
-
-      <FadeIn
-        delay={0.15}
-        x={80}
-        y={0}
-        duration={0.9}
-        className="absolute right-[1%] top-[4%] z-0 sm:right-[2%] md:right-[4%]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
-          alt=""
-          className="h-auto w-[120px] sm:w-[160px] md:w-[210px]"
-        />
-      </FadeIn>
-
-      {/* Bottom Right */}
-
-      <FadeIn
-        delay={0.3}
-        x={80}
-        y={0}
-        duration={0.9}
-        className="absolute bottom-[8%] right-[3%] z-0 sm:right-[6%] md:right-[10%]"
-      >
-        <img
-          src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
-          alt=""
-          className="h-auto w-[130px] sm:w-[170px] md:w-[220px]"
-        />
-      </FadeIn>
-
-      {/* Content */}
-
-      <div className="relative z-10 flex max-w-4xl flex-col items-center gap-16 text-center sm:gap-20 md:gap-24">
-
-        <div className="flex flex-col items-center gap-10 sm:gap-14 md:gap-16">
-
-          <FadeIn delay={0}>
-            <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight">
-              {aboutContent.title}
-            </h2>
-          </FadeIn>
-
-          <AnimatedText text={aboutContent.description} />
-
-        </div>
-
-        <FadeIn
-          delay={0.2}
-          y={20}
-          className="space-y-3"
+    <section id="about" className="about-section">
+      <div className="about-inner">
+        <motion.h2
+          className="about-heading"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <h3 className="text-2xl font-semibold text-white">
-            {aboutContent.name}
-          </h3>
+          About me
+        </motion.h2>
 
-          <p className="text-sm uppercase tracking-[0.45em] text-white/60">
-            {aboutContent.role}
-          </p>
-        </FadeIn>
+        <AnimatedText text={ABOUT_TEXT} />
 
-        <FadeIn
-          delay={0.3}
-          y={20}
+        <motion.a
+          href="#contact"
+          className="about-cta"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <motion.a
-            href="#contact"
-            whileHover={{ opacity: 0.9 }}
-            whileTap={{ opacity: 0.75 }}
-            transition={{ duration: 0.2 }}
-            className="
-              inline-flex
-              rounded-full
-              px-10
-              py-4
-              text-sm
-              font-medium
-              uppercase
-              tracking-[0.35em]
-              text-white
-            "
-            style={{
-              background:
-                "linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%)",
-              boxShadow:
-                "0px 4px 4px rgba(181,1,167,.25),4px 4px 12px #7721B1 inset",
-              outline: "2px solid #E3E3E3",
-              outlineOffset: "-3px",
-            }}
-          >
-            Let's Connect
-          </motion.a>
-        </FadeIn>
-
+          Let's Connect
+        </motion.a>
       </div>
+
+      <Pet />
     </section>
   );
 };
