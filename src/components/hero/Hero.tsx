@@ -8,11 +8,11 @@
 import { useRef, useState, Fragment } from "react";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 import { motion } from "framer-motion";
+import HeroBlob from "./HeroBlob";
 import TextRoll from "../common/TextRoll";
 import "./styles.css";
-import HeroBlob from "./HeroBlob";
 
-
+/* rolls a phrase in, letter by letter, starting at `base` seconds */
 const RollChars = ({ text, base }: { text: string; base: number }) => {
   const words = text.split(" ");
   return (
@@ -47,11 +47,15 @@ const RollChars = ({ text, base }: { text: string; base: number }) => {
 };
 
 const HeroTitle = () => (
-  <h1 className="hero-title" aria-label="Building intelligent data experiences.">
-    <RollChars text="Building intelligent data experiences." base={0.1} />
+  <h1
+    className="hero-title"
+    aria-label="Build the pipelines and the intelligence on top."
+  >
+    <RollChars text="Build the pipelines and the Intelligence on top." base={0.1} />
   </h1>
 );
 
+/* magnetic CTA — leans toward the cursor */
 const MagnetButton = ({
   href,
   className,
@@ -106,8 +110,8 @@ const Hero = () => {
     const y = e.clientY - r.top;
     el.style.setProperty("--mx", `${x}px`);
     el.style.setProperty("--my", `${y}px`);
-    el.style.setProperty("--bx", `${(x / r.width - 0.5) * 60}px`);
-    el.style.setProperty("--by", `${(y / r.height - 0.5) * 60}px`);
+    el.style.setProperty("--bx", `${(x / r.width - 0.5) * 40}px`);
+    el.style.setProperty("--by", `${(y / r.height - 0.5) * 40}px`);
   };
 
   return (
@@ -118,13 +122,25 @@ const Hero = () => {
 
       <div className="hero-inner">
         <motion.p
+          className="hero-whoami"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="hw-cmd">{"> whoami"}</span>
+          <span className="hw-arrow">{" → "}</span>
+          <span className="hw-name">Yuvaraj</span>
+          <span className="hw-tag">{" — human in the loop"}</span>
+        </motion.p>
+
+        <motion.p
           className="hero-eyebrow"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
           AWS Data Engineer <span className="dot">·</span> Generative AI{" "}
-          <span className="dot">·</span> Web Developer
+          <span className="dot">·</span> <br></br>Web Developer
         </motion.p>
 
         <HeroTitle />
@@ -135,9 +151,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
         >
-          I design scalable cloud-native platforms, AI-powered solutions and
-          modern web applications focused on performance, reliability and
-          thoughtful engineering.
+          I build cloud-native data platforms on AWS and the AI systems that
+          run on top of them from large-scale migrations to
+          retrieval-augmented assistants.
         </motion.p>
 
         <motion.div

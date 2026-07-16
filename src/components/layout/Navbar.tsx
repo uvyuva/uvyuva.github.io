@@ -5,6 +5,7 @@
  * --------------------------------------------------
  */
 
+import { useEffect, useState } from "react";
 import TextRoll from "../common/TextRoll";
 
 const NAV = [
@@ -12,12 +13,32 @@ const NAV = [
   { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
   { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-[#050505] via-[#050505]/70 to-transparent backdrop-blur-[3px]">
-      <div className="mx-auto flex h-20 max-w-[1200px] items-center justify-between px-6">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-white/10 bg-[#050505]/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div
+        className={`mx-auto flex h-20 max-w-[1200px] items-center justify-between px-6 ${
+          scrolled ? "" : "[text-shadow:0_1px_16px_rgba(0,0,0,0.45)]"
+        }`}
+      >
         <a href="#hero" className="text-2xl font-bold tracking-tight text-white">
           UV
         </a>
@@ -27,7 +48,7 @@ const Navbar = () => {
             <a
               key={item.href}
               href={item.href}
-              className="text-xs uppercase tracking-[0.3em] text-white/70 transition-colors duration-300 hover:text-white"
+              className="text-xs uppercase tracking-[0.3em] text-white/80 transition-colors duration-300 hover:text-white"
             >
               <TextRoll text={item.label} />
             </a>

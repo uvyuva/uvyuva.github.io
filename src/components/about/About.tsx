@@ -1,9 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import RollingText from "../common/RollingText";
+import TextRoll from "../common/TextRoll";
 import "./styles.css";
 
 const ABOUT_TEXT =
-  "I enjoy building systems that solve real problems — from scalable AWS data platforms to AI-powered applications and modern web experiences. I believe great software is not just functional, but intuitive, reliable and thoughtfully engineered. Every project is an opportunity to simplify complexity, automate repetitive work and create experiences that people genuinely enjoy using.";
+  "I care about the parts users never see, the pipeline that doesn't break at 2am, the query that returns in milliseconds, the automation that quietly saves someone hours every week. I like taking messy, complex problems and making them feel simple. Data, AI, or the Web I build things to be reliable first and delightful second and I sweat the details until they're both.";
 
 /* one character — its own component so useTransform is a top-level hook */
 const Char = ({
@@ -40,15 +42,14 @@ const AnimatedText = ({ text }: { text: string }) => {
   );
 };
 
-
-/* walk-cycle frames — save as transparent PNGs in /public/pet/ */
+/* walk-cycle frames — transparent PNGs in /public/pet/ */
 const PET_FRAMES = [
   "/pet/walk-1.png",
   "/pet/walk-2.png",
   "/pet/walk-3.png",
   "/pet/walk-4.png",
 ];
-const PET_FPS = 8; // frames per second of the walk cycle
+const PET_FPS = 8;
 
 const Pet = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +62,6 @@ const Pet = () => {
   const [frame, setFrame] = useState(0);
   const [moving, setMoving] = useState(false);
 
-  /* mark "moving" while scrolling, then stop shortly after scroll ends */
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
     const onScroll = () => {
@@ -76,16 +76,16 @@ const Pet = () => {
     };
   }, []);
 
-  /* only cycle the legs while moving; settle on a standing frame when idle */
   useEffect(() => {
-    if (!moving) return; // don't setState here — just stop cycling
+    if (!moving) return;
     const id = setInterval(
       () => setFrame((f) => (f + 1) % PET_FRAMES.length),
       1000 / PET_FPS
     );
     return () => clearInterval(id);
   }, [moving]);
-const shown = moving ? frame : 0;
+
+  const shown = moving ? frame : 0;
 
   return (
     <div ref={ref} className="about-pet-track">
@@ -118,15 +118,9 @@ const About = () => {
   return (
     <section id="about" className="about-section">
       <div className="about-inner">
-        <motion.h2
-          className="about-heading"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          About me
-        </motion.h2>
+        <h2 className="about-heading">
+          <RollingText text="About me" />
+        </h2>
 
         <AnimatedText text={ABOUT_TEXT} />
 
@@ -138,7 +132,7 @@ const About = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          Let's Connect
+          <TextRoll text="Let's Connect" />
         </motion.a>
       </div>
 

@@ -12,6 +12,23 @@
   text-align: center;
 }
 
+.hero-whoami {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #737373;
+  margin: 0 0 14px;
+}
+
+.hero-whoami .hw-name {
+  color: #fff;
+  font-weight: 500;
+}
+
+.hero-whoami .hw-tag {
+  color: #93c5fd;
+}
+
 /* aurora glow */
 
 .hero-blob-canvas,

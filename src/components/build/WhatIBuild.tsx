@@ -34,9 +34,8 @@ const WhatIBuild = () => {
           </h2>
 
           <p className="mx-auto mt-8 max-w-2xl text-[17px] leading-8 text-white/55">
-            I focus on building reliable cloud-native systems, AI-powered
-            applications and modern web experiences that balance performance,
-            scalability and thoughtful engineering.
+            Three things I keep coming back to: moving data at scale, making
+            it intelligent, and shipping interfaces people actually enjoy.
           </p>
         </div>
 

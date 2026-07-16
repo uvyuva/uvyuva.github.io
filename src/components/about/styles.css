@@ -5,12 +5,10 @@
   flex-direction: column;
   align-items: center;
   background: #050505;
-  padding: clamp(48px, 7vh, 90px) 24px clamp(210px, 30vh, 320px);
+  padding: clamp(48px, 7vh, 90px) 24px clamp(240px, 34vh, 360px);
   overflow: hidden;
   box-sizing: border-box;
 }
-
-
 
 .about-inner {
   position: relative;
@@ -23,7 +21,7 @@
   gap: clamp(32px, 6vh, 60px);
 }
 
-/* silver gradient heading — neutral, matches dark theme (no purple) */
+/* heading — silver gradient applied per rolling-char so it survives the roll transform */
 .about-heading {
   margin: 0;
   font-size: clamp(3rem, 12vw, 150px);
@@ -31,6 +29,10 @@
   text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: 0.95;
+  color: #e8eef3;
+}
+
+.about-heading .rolling-char > span {
   background: linear-gradient(180deg, #8b93a0 0%, #e8eef3 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -47,7 +49,7 @@
   word-spacing: 0.02em;
 }
 
-/* CTA — themed blue, no purple */
+/* CTA — themed blue */
 .about-cta {
   color: #fff;
   font-size: 14px;
@@ -69,21 +71,23 @@
 }
 
 /* Pet — runs along the bottom, driven by scroll */
-.about-pet {
-  position: absolute;
-  bottom: 0;
-  width: clamp(120px, 15vw, 190px);
-  height: auto;
-}
-
 .about-pet-track {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: clamp(20px, 4vh, 48px);
-  height: clamp(140px, 16vw, 200px);
+  bottom: clamp(16px, 3vh, 36px);
+  height: clamp(120px, 14vw, 180px);
   pointer-events: none;
   z-index: 1;
+}
+
+.about-pet {
+  position: absolute;
+  bottom: 0;
+  width: clamp(110px, 13vw, 170px);
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 22px rgba(59, 130, 246, 0.35));
 }
 
 .about-pet-frame {
@@ -92,7 +96,6 @@
   height: auto;
 }
 
-/* stacked frames overlay the first one, which sizes the box */
 .about-pet-frame:not(:first-child) {
   position: absolute;
   inset: 0;
