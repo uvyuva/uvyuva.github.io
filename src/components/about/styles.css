@@ -5,10 +5,12 @@
   flex-direction: column;
   align-items: center;
   background: #050505;
-  padding: clamp(80px, 12vh, 140px) 24px;
+  padding: clamp(48px, 7vh, 90px) 24px clamp(210px, 30vh, 320px);
   overflow: hidden;
   box-sizing: border-box;
 }
+
+
 
 .about-inner {
   position: relative;
@@ -72,6 +74,16 @@
   bottom: 0;
   width: clamp(120px, 15vw, 190px);
   height: auto;
+}
+
+.about-pet-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(20px, 4vh, 48px);
+  height: clamp(140px, 16vw, 200px);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .about-pet-frame {

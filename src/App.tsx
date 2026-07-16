@@ -5,24 +5,26 @@
  * Author: Yuvaraj P.
  * --------------------------------------------------
  */
-import Footer from "./components/footer/Footer";
-import Contact from "./components/contact/Contact";
-import Skills from "./components/skills/Skills";
-import Work from "./components/work";
-import Journey from "./components/journey";
-import About from "./components/about";
-import WhatIBuild from "./components/build";
+import { ReactLenis } from "lenis/react";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
-//import ScrollIndicator from "./components/common/ScrollIndicator";
+import WhatIBuild from "./components/build";
+import About from "./components/about";
+import Journey from "./components/journey";
+import Work from "./components/work";
+import Skills from "./components/skills/Skills";
+import Contact from "./components/contact/Contact";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
-    <>
+    <ReactLenis
+      root
+      options={{ lerp: 0.1, duration: 1.2, smoothWheel: true, anchors: true }}
+    >
       <Navbar />
 
       <main className="relative">
-
         <Hero />
         <WhatIBuild />
         <About />
@@ -30,9 +32,9 @@ function App() {
         <Work />
         <Skills />
         <Contact />
-        <Footer/>
+        <Footer />
       </main>
-    </>
+    </ReactLenis>
   );
 }
 

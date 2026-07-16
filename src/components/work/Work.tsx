@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { projects, type Project } from "../../data/projects";
 import ProjectArchitecture from "./ProjectArchitecture";
+import TextRoll from "../common/TextRoll";
+import RollingText from "../common/RollingText";
 import "./styles.css";
-import TextRoll from "../common/TextRoll";       // if you used Rule A
-import RollingText from "../common/RollingText";  // if you used Rule B
 
 interface StickyCardProps {
   project: Project;
@@ -22,12 +22,17 @@ const StickyCard = ({
   targetScale,
 }: StickyCardProps) => {
   const scale = useTransform(progress, range, [1, targetScale]);
+  const rotate = useTransform(
+    progress,
+    range,
+    [0, targetScale < 1 ? (index % 2 === 0 ? -3 : 3) : 0]
+  );
 
   return (
     <div className="work-sticky">
       <motion.article
         className="work-card"
-        style={{ scale, top: `calc(-5vh + ${index * 26}px)` }}
+        style={{ scale, rotate, top: `calc(-5vh + ${index * 26}px)` }}
       >
         <div className="work-card-head">
           <div className="work-card-headleft">
@@ -39,9 +44,9 @@ const StickyCard = ({
           </div>
 
           {project.liveUrl && (
-           <a className="live-btn" href={project.liveUrl} target="_blank" rel="noreferrer">
+            <a className="live-btn" href={project.liveUrl} target="_blank" rel="noreferrer">
               <TextRoll text="Live Project ↗" />
-          </a>
+            </a>
           )}
         </div>
 
@@ -90,9 +95,8 @@ const Work = () => {
     <section id="work" className="work-section">
       <div className="work-header">
         <p className="work-eyebrow">Selected Work</p>
-        
         <h2 className="work-heading">
-           <RollingText text="Systems built to Ship" />
+          <RollingText text="Systems built to Ship" />
         </h2>
       </div>
 

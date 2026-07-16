@@ -1,4 +1,3 @@
-
 /**
  * --------------------------------------------------
  * UV Portfolio
@@ -6,8 +5,15 @@
  * --------------------------------------------------
  */
 
-import TextRoll from "../common/TextRoll";   // if you used Rule A
+import TextRoll from "../common/TextRoll";
 
+const NAV = [
+  { label: "Expertise", href: "#build" },
+  { label: "About", href: "#about" },
+  { label: "Work", href: "#work" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+];
 
 const Navbar = () => {
   return (
@@ -17,19 +23,19 @@ const Navbar = () => {
           UV
         </a>
 
-        <nav className="hidden items-center gap-12 md:flex">
-          {["Work", "About", "Contact"].map((item) => (
+        <nav className="hidden items-center gap-10 md:flex">
+          {NAV.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.href}
+              href={item.href}
               className="text-xs uppercase tracking-[0.3em] text-white/70 transition-colors duration-300 hover:text-white"
             >
-              <TextRoll text={item} />
+              <TextRoll text={item.label} />
             </a>
           ))}
         </nav>
 
-       <a
+        <a
           href="#contact"
           className="hidden rounded-full bg-white px-6 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-black transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(255,255,255,0.15)] md:inline-block"
         >

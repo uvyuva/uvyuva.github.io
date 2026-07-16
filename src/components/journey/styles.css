@@ -28,6 +28,19 @@
   padding-bottom: 0;
 }
 
+
+.timeline-progress {
+  position: absolute;
+  left: 20px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  transform-origin: top;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #3b82f6 0%, #93c5fd 100%);
+  z-index: 1;
+}
+
 /* dot sits on the line, ring masks the line behind it */
 .timeline-dot {
   position: relative;

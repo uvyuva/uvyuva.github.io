@@ -5,15 +5,12 @@
  * --------------------------------------------------
  */
 
-import { useRef, useState, useEffect, Fragment } from "react";
+import { useRef, useState, Fragment } from "react";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import TextRoll from "../common/TextRoll";
 import "./styles.css";
 
-const ROTATING = ["data", "AI", "cloud"];
-
-/* rolls a phrase in, letter by letter, starting at `base` seconds */
 const RollChars = ({ text, base }: { text: string; base: number }) => {
   const words = text.split(" ");
   return (
@@ -47,36 +44,12 @@ const RollChars = ({ text, base }: { text: string; base: number }) => {
   );
 };
 
-const HeroTitle = () => {
-  const [w, setW] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setW((p) => (p + 1) % ROTATING.length), 2200);
-    return () => clearInterval(id);
-  }, []);
+const HeroTitle = () => (
+  <h1 className="hero-title" aria-label="Building intelligent data experiences.">
+    <RollChars text="Building intelligent data experiences." base={0.1} />
+  </h1>
+);
 
-  return (
-    <h1 className="hero-title" aria-label="Building intelligent data experiences.">
-      <RollChars text="Building intelligent" base={0.1} />{" "}
-      <span className="hero-rotate" aria-hidden="true">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={ROTATING[w]}
-            className="hero-rotate-word"
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {ROTATING[w]}
-          </motion.span>
-        </AnimatePresence>
-      </span>
-      <RollChars text="experiences." base={0.5} />
-    </h1>
-  );
-};
-
-/* magnetic CTA — leans toward the cursor */
 const MagnetButton = ({
   href,
   className,

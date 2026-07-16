@@ -5,14 +5,28 @@
  * --------------------------------------------------
  */
 
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Container from "../common/Container";
 import FadeIn from "./FadeIn";
+import RollingText from "../common/RollingText";
 
 import { journeyData } from "../../data/journey";
 
 import "./styles.css";
 
 const Journey = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 0.85", "end 0.65"],
+  });
+  const drawn = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <section id="journey" className="relative overflow-hidden bg-black py-36">
       <Container className="max-w-[1500px]">
@@ -24,18 +38,19 @@ const Journey = () => {
 
             <h2
               className="text-5xl font-light leading-[0.95] text-white md:text-6xl lg:text-7xl"
-              style={{ letterSpacing: "-0.04em" }}
-            >
-              From ETL foundations
+              style={{ letterSpacing: "-0.04em" }}>
+              <RollingText text="From ETL foundations" />
               <br />
-              to cloud engineering
+              <RollingText text="to cloud engineering" />
               <br />
-              and Generative AI.
+              <RollingText text="and Generative AI." />
             </h2>
           </div>
         </FadeIn>
 
-        <div className="timeline">
+        <div className="timeline" ref={timelineRef}>
+          <motion.span className="timeline-progress" style={{ scaleY: drawn }} />
+
           {journeyData.map((step, index) => (
             <FadeIn
               key={step.year}
