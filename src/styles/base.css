@@ -22,7 +22,7 @@
   .lenis.lenis-stopped {
     overflow: clip;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -33,9 +33,10 @@
     scroll-behavior: smooth;
   }
 
+
   body {
     margin: 0;
-    background: var(--color-bg);
+    background: #050505;
     color: var(--color-text);
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;

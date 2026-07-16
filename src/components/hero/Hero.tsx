@@ -10,6 +10,8 @@ import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 import { motion } from "framer-motion";
 import TextRoll from "../common/TextRoll";
 import "./styles.css";
+import HeroBlob from "./HeroBlob";
+
 
 const RollChars = ({ text, base }: { text: string; base: number }) => {
   const words = text.split(" ");
@@ -106,18 +108,7 @@ const Hero = () => {
 
   return (
     <section ref={heroRef} id="hero" className="hero" onMouseMove={handleMove}>
-      <div className="hero-glow">
-        <motion.span
-          className="hero-blob hero-blob-blue"
-          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.span
-          className="hero-blob hero-blob-gold"
-          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+      <HeroBlob />
 
       <div className="hero-spotlight" />
 

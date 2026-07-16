@@ -28,8 +28,8 @@ const Journey = () => {
   });
 
   return (
-    <section id="journey" className="relative overflow-hidden bg-black py-36">
-      <Container className="max-w-[1500px]">
+    <section id="journey" className="relative overflow-hidden bg-[#050505] py-36">
+      <Container className="max-w-375">
         <FadeIn>
           <div className="mx-auto mb-24 max-w-4xl text-center">
             <p className="mb-5 text-xs uppercase tracking-[0.45em] text-neutral-500">

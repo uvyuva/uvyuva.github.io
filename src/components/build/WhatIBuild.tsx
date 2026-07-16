@@ -13,10 +13,10 @@ import RollingText from "../common/RollingText";  // if you used Rule B
 
 const WhatIBuild = () => {
   return (
-    <section id="build" className="relative overflow-hidden bg-black py-28">
+    <section id="build" className="relative overflow-hidden bg-[#050505] py-28">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_65%)]" />
 
-      <Container className="relative z-10 max-w-[1200px]">
+      <Container className="relative z-10 max-w-300">
         <div className="mx-auto mb-20 max-w-4xl text-center">
           <p className="mb-5 text-xs uppercase tracking-[0.5em] text-neutral-500">
             WHAT I BUILD

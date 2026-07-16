@@ -1,5 +1,3 @@
-
-
 .skills-section {
   background: #050505;
   padding: clamp(48px, 7vh, 80px) 24px;
@@ -31,19 +29,20 @@
   margin: 0 auto;
 }
 
-/* bento grid */
+/* two content-sized columns */
 .skills-bento {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(190px, 1fr);
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
 }
 
-.tile-cloud { grid-column: 1 / 3; grid-row: 1 / 3; }
-.tile-genai { grid-column: 3 / 5; grid-row: 1; }
-.tile-data  { grid-column: 3 / 5; grid-row: 2; }
-.tile-prog  { grid-column: 1 / 3; grid-row: 3; }
-.tile-tools { grid-column: 3 / 5; grid-row: 3; }
+.bento-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 /* tile */
 .skill-tile {
@@ -147,19 +146,10 @@
   to { transform: translateX(-50%); }
 }
 
-/* responsive — single column, skills stay visible (no hover dependency) */
+/* responsive — stack into one column, skills stay visible */
 @media (max-width: 860px) {
   .skills-bento {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-  }
-  .tile-cloud,
-  .tile-genai,
-  .tile-data,
-  .tile-prog,
-  .tile-tools {
-    grid-column: auto;
-    grid-row: auto;
+    flex-direction: column;
   }
 }
 
