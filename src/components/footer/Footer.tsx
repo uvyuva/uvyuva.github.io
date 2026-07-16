@@ -1,4 +1,5 @@
 import "./styles.css";
+import TextRoll from "../common/TextRoll";   
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -13,7 +14,7 @@ const Footer = () => {
         </p>
 
         <a className="footer-top" href="#top">
-          Back to top ↑
+          <TextRoll text= "Back to top ↑" />
         </a>
       </div>
     </footer>

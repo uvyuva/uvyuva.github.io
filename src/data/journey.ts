@@ -43,7 +43,7 @@ export const journeyData: JourneyStep[] = [
       "Building AI-powered applications using LLMs, Prompt Engineering and Retrieval-Augmented Generation to automate modern workflows.",
 
     technologies: [
-      "LLMs",
+      "LLM's",
       "RAG",
       "Prompt Engineering",
       "OpenAI",

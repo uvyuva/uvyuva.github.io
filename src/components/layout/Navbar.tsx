@@ -8,7 +8,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLenis } from "lenis/react";
 import { FiMenu, FiX } from "react-icons/fi";
 import TextRoll from "../common/TextRoll";
 
@@ -23,7 +22,7 @@ const NAV = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const lenis = useLenis();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -32,25 +31,21 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // freeze background scroll while the mobile menu is open
-  useEffect(() => {
-    if (open) lenis?.stop();
-    else lenis?.start();
-  }, [open, lenis]);
 
-  const solid = scrolled || open;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid
+        open
+          ? "border-b border-white/10 bg-[#050505]"
+          : scrolled
           ? "border-b border-white/10 bg-[#050505]/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <div
         className={`mx-auto flex h-20 max-w-[1200px] items-center justify-between px-6 ${
-          solid ? "" : "[text-shadow:0_1px_16px_rgba(0,0,0,0.45)]"
+          scrolled || open ? "" : "[text-shadow:0_1px_16px_rgba(0,0,0,0.45)]"
         }`}
       >
         <a
@@ -93,15 +88,15 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* mobile menu overlay */}
+      {/* mobile menu overlay — fully opaque */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-x-0 bottom-0 top-20 z-40 flex flex-col items-center gap-8 bg-[#050505]/95 px-6 pt-16 backdrop-blur-xl md:hidden"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-x-0 bottom-0 top-20 z-40 flex flex-col items-center justify-center gap-8 bg-[#050505] px-6 md:hidden"
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {NAV.map((item) => (
               <a

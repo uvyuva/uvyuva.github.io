@@ -89,7 +89,9 @@ const Contact = () => {
                       {s.icon}
                     </svg>
                   </span>
-                  <span className="social-label">{s.label}</span>
+                  <span className="social-label">
+                    <TextRoll text={s.label} />
+                  </span>
                 </a>
               ))}
             </div>
