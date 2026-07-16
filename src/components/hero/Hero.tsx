@@ -102,8 +102,12 @@ const Hero = () => {
     const el = heroRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    el.style.setProperty("--mx", `${x}px`);
+    el.style.setProperty("--my", `${y}px`);
+    el.style.setProperty("--bx", `${(x / r.width - 0.5) * 60}px`);
+    el.style.setProperty("--by", `${(y / r.height - 0.5) * 60}px`);
   };
 
   return (

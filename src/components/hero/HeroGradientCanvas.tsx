@@ -1,4 +1,3 @@
-
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 const HeroGradientCanvas = () => (
@@ -8,17 +7,17 @@ const HeroGradientCanvas = () => (
     <ShaderGradient
       control="props"
       animate="on"
-      type="waterPlane"
-      uSpeed={0.2}
-      uStrength={1.3}
-      uDensity={1.4}
-      uFrequency={5.5}
+      type="sphere"
+      uSpeed={0.3}
+      uStrength={0.45}
+      uDensity={0.9}
+      uFrequency={0}
       color1="#1E3A8A"
       color2="#3B82F6"
       color3="#93C5FD"
       grain="on"
-      cDistance={3.4}
-      cameraZoom={1}
+      cDistance={3.6}
+      cameraZoom={9}
       cAzimuthAngle={180}
       cPolarAngle={90}
       positionX={0}
@@ -28,7 +27,7 @@ const HeroGradientCanvas = () => (
       rotationY={0}
       rotationZ={0}
       reflection={0.1}
-      brightness={0.9}
+      brightness={1.15}
       lightType="3d"
     />
   </ShaderGradientCanvas>
