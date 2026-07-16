@@ -7,7 +7,7 @@
   min-height: 100svh;
   overflow: hidden;
   background: #050505;
-  padding: 140px 24px 100px;
+  padding: clamp(90px, 12vh, 120px) 24px 60px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -92,8 +92,9 @@
 .hero-title {
   color: #fff;
   margin: 0 auto;
-  max-width: 16ch;
-  line-height: 1.05;
+  max-width: 20ch;
+  font-size: clamp(2.5rem, min(6vw,9vh), 6rem);
+  line-height: 1.04;
 }
 
 .hero-title .roll-word {
@@ -120,18 +121,18 @@
 
 .hero-subtitle {
   color: #8b93a0;
-  font-size: clamp(16px, 1.6vw, 19px);
-  line-height: 1.7;
-  max-width: 600px;
-  margin: 28px auto 0;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 24px auto 0;
 }
 
 .hero-cta-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
-  margin-top: 44px;
+  gap: 14px;
+  margin-top: 32px;
 }
 
 .hero-btn {
