@@ -8,7 +8,6 @@
 import { useRef, useState, Fragment } from "react";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 import { motion } from "framer-motion";
-import HeroBlob from "./HeroBlob";
 import TextRoll from "../common/TextRoll";
 import "./styles.css";
 
@@ -100,26 +99,8 @@ const MagnetButton = ({
 };
 
 const Hero = () => {
-  const heroRef = useRef<HTMLElement>(null);
-
-  const handleMove = (e: ReactMouseEvent) => {
-    const el = heroRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    el.style.setProperty("--mx", `${x}px`);
-    el.style.setProperty("--my", `${y}px`);
-    el.style.setProperty("--bx", `${(x / r.width - 0.5) * 40}px`);
-    el.style.setProperty("--by", `${(y / r.height - 0.5) * 40}px`);
-  };
-
   return (
-    <section ref={heroRef} id="hero" className="hero" onMouseMove={handleMove}>
-      <HeroBlob />
-
-      <div className="hero-spotlight" />
-
+    <section id="hero" className="hero">
       <div className="hero-inner">
         <motion.p
           className="hero-whoami"

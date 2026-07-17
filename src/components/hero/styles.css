@@ -29,41 +29,7 @@
   color: #93c5fd;
 }
 
-/* aurora glow */
 
-.hero-blob-canvas,
-.hero-blob-fallback {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  transform: translate(var(--bx, 0px), var(--by, 0px)) scale(1.12);
-  transition: transform 0.2s ease-out;
-  will-change: transform;
-}
-
-.hero-blob-fallback {
-  background:
-    radial-gradient(70% 55% at 50% 42%, rgba(59, 130, 246, 0.6) 0%, rgba(37, 99, 235, 0.35) 35%, transparent 70%),
-    radial-gradient(55% 50% at 72% 70%, rgba(30, 58, 138, 0.55) 0%, transparent 65%),
-    radial-gradient(45% 45% at 28% 65%, rgba(147, 197, 253, 0.3) 0%, transparent 70%);
-}
-
-
-
-/* cursor spotlight */
-.hero-spotlight {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(
-    600px circle at var(--mx, 50%) var(--my, 30%),
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.04) 25%,
-    transparent 50%
-  );
-}
 
 /* content */
 .hero-inner {
@@ -71,11 +37,6 @@
   z-index: 2;
   max-width: 1000px;
   margin: 0 auto;
-}
-
-.hero-eyebrow .dot {
-  color: #f5c542;
-  margin: 0 4px;
 }
 
 .hero-eyebrow {
@@ -87,13 +48,17 @@
   margin: 0 0 28px;
 }
 
-/* shimmer heading (gradient sweeps once on load) */
+.hero-eyebrow .dot {
+  color: #f5c542;
+  margin: 0 4px;
+}
+
 /* RollingText heading */
 .hero-title {
   color: #fff;
   margin: 0 auto;
   max-width: 20ch;
-  font-size: clamp(2.5rem, min(6vw,9vh), 6rem);
+  font-size: clamp(2.5rem, min(6vw, 9vh), 6rem);
   line-height: 1.04;
 }
 
@@ -108,16 +73,6 @@
   padding-bottom: 0.14em;   /* room so descenders (g, y) aren't clipped by the mask */
   margin-bottom: -0.14em;
 }
-
-/* rotating word — gold accent so it always pops */
-
-/* gold separators in the eyebrow */
-.hero-eyebrow .dot {
-  color: #f5c542;
-  margin: 0 4px;
-}
-
-
 
 .hero-subtitle {
   color: #8b93a0;
@@ -173,4 +128,3 @@
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.4);
 }
-
