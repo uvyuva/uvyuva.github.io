@@ -38,15 +38,15 @@
   z-index: 0;
   pointer-events: none;
   transform: translate(var(--bx, 0px), var(--by, 0px)) scale(1.12);
-  transition: transform 0s ease-out;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
 }
 
 .hero-blob-fallback {
   background:
-    radial-gradient(60% 60% at 50% 40%, rgba(59, 130, 246, 0.35), transparent 70%),
-    radial-gradient(50% 55% at 70% 65%, rgba(30, 58, 138, 0.4), transparent 70%),
-    radial-gradient(45% 45% at 30% 62%, rgba(147, 197, 253, 0.2), transparent 70%);
-  filter: blur(40px);
+    radial-gradient(70% 55% at 50% 42%, rgba(59, 130, 246, 0.6) 0%, rgba(37, 99, 235, 0.35) 35%, transparent 70%),
+    radial-gradient(55% 50% at 72% 70%, rgba(30, 58, 138, 0.55) 0%, transparent 65%),
+    radial-gradient(45% 45% at 28% 65%, rgba(147, 197, 253, 0.3) 0%, transparent 70%);
 }
 
 
@@ -125,6 +125,7 @@
   line-height: 1.65;
   max-width: 580px;
   margin: 24px auto 0;
+  text-align: left;
 }
 
 .hero-cta-row {

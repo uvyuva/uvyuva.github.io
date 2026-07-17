@@ -33,10 +33,10 @@ const WhatIBuild = () => {
             <RollingText text="experiences." />
           </h2>
 
-          <p className="mx-auto mt-8 max-w-2xl text-[17px] leading-8 text-white/55">
-            Three things I keep coming back to: moving data at scale, making
-            it intelligent, and shipping interfaces people actually enjoy.
-          </p>
+            <p className="mx-auto mt-8 max-w-2xl text-left text-[17px] leading-8 text-white/55">
+              Three things I keep coming back to: moving data at scale, making it
+              intelligent, and shipping interfaces people actually enjoy.
+            </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

@@ -51,41 +51,28 @@ const Skills = () => {
                 if (!group) return null;
                 const meta = META[label] ?? FALLBACK;
                 const Icon = meta.icon;
-                const isTools = label === "Tools";
 
                 return (
-                  <div
-                    key={label}
-                    className={`skill-tile ${meta.tile}`}
-                    style={{ "--accent": meta.accent, "--glow": meta.glow } as CSSProperties}
-                  >
-                    <div className="skill-tile-head">
-                      <span className="skill-tile-icon">
-                        <Icon />
-                      </span>
-                      <span className="skill-tile-label">{label}</span>
-                    </div>
-
-                    {isTools ? (
-                      <div className="skill-marquee">
-                        <div className="skill-marquee-track">
-                          {[...group.skills, ...group.skills].map((s, i) => (
-                            <span key={i} className="skill-chip">
-                              {s}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <ul className="skill-list">
-                        {group.skills.map((s) => (
-                          <li key={s} className="skill-chip">
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                <div
+                  key={label}
+                  className={`skill-tile ${meta.tile}`}
+                  style={{ "--accent": meta.accent, "--glow": meta.glow } as CSSProperties}
+                >
+                  <div className="skill-tile-head">
+                    <span className="skill-tile-icon">
+                      <Icon />
+                    </span>
+                    <span className="skill-tile-label">{label}</span>
                   </div>
+
+                  <ul className="skill-list">
+                    {group.skills.map((s) => (
+                      <li key={s} className="skill-chip">
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 );
               })}
             </div>
