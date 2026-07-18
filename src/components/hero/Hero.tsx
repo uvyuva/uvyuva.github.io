@@ -1,5 +1,3 @@
-
-
 /**
  * --------------------------------------------------
  * UV Portfolio
@@ -11,9 +9,9 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import TextRoll from "../common/TextRoll";
+import { useWhoami } from "../whoami/WhoamiProvider";
 import "@fontsource-variable/roboto-flex/index.css";
 import "./styles.css";
-
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -29,19 +27,21 @@ const REST1 = 560; // resting weight, line 1 (the structured base)
 const REST2 = 300; // resting weight, line 2 (light, reactive)
 const MAX_SCALE = 0.1; // extra transform-scale at the head
 
-/* magnetic CTA — leans toward the cursor (unchanged) */
+/* magnetic CTA — leans toward the cursor */
 const MagnetButton = ({
   href,
   className,
   children,
   target,
   rel,
+  onClick,
 }: {
   href: string;
   className: string;
   children: ReactNode;
   target?: string;
   rel?: string;
+  onClick?: (e: ReactMouseEvent) => void;
 }) => {
   const ref = useRef<HTMLAnchorElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -62,6 +62,7 @@ const MagnetButton = ({
       href={href}
       target={target}
       rel={rel}
+      onClick={onClick}
       className={className}
       onMouseMove={handleMove}
       onMouseLeave={() => setPos({ x: 0, y: 0 })}
@@ -74,6 +75,7 @@ const MagnetButton = ({
 };
 
 const Hero = () => {
+  const { open: openWhoami } = useWhoami();
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scanRef = useRef<HTMLSpanElement>(null);
@@ -85,9 +87,7 @@ const Hero = () => {
     const section = sectionRef.current;
     if (!title || !section) return;
 
-    const glyphs = Array.from(
-      title.querySelectorAll<HTMLElement>(".hero-glyph")
-    );
+    const glyphs = Array.from(title.querySelectorAll<HTMLElement>(".hero-glyph"));
     const bases = glyphs.map((g) => Number(g.dataset.base) || 400);
 
     // reduced motion → static, intentional weight (heavy base → light top)
@@ -110,7 +110,6 @@ const Hero = () => {
       secLeft = section.getBoundingClientRect().left;
     };
     measure();
-    // remeasure once the variable font has actually loaded
     document.fonts?.ready.then(measure);
 
     const pointer = { x: 0, lx: 0, active: false };
@@ -140,7 +139,6 @@ const Hero = () => {
       let headX: number | null = null;
       if (pointer.active) headX = pointer.x;
       else if (!hasHover && centers.length) {
-        // touch / no-hover: head auto-sweeps left↔right
         const t = performance.now() / 1600;
         const min = centers[0];
         const max = centers[centers.length - 1];
@@ -216,9 +214,7 @@ const Hero = () => {
         <span
           className={
             "hero-word" +
-            (accentWord && word.replace(/[.,]/g, "") === accentWord
-              ? " hero-word--accent"
-              : "")
+            (accentWord && word.replace(/[.,]/g, "") === accentWord ? " hero-word--accent" : "")
           }
         >
           {word.split("").map((ch, ci) => (
@@ -271,10 +267,12 @@ const Hero = () => {
             <TextRoll text="Let's Connect →" />
           </MagnetButton>
           <MagnetButton
-            href="/cv.pdf"
-            target="_blank"
-            rel="noreferrer"
+            href="#whoami"
             className="hero-btn hero-btn-ghost"
+            onClick={(e) => {
+              e.preventDefault();
+              openWhoami("recruiter");
+            }}
           >
             <TextRoll text="Download CV ↓" />
           </MagnetButton>

@@ -1,3 +1,8 @@
 node_modules/
 .wrangler/
 .dev.vars
+*.tmp.json
+vip*.json
+vadhu.json
+testy.json
+t.json

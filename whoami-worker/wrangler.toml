@@ -9,4 +9,4 @@ kv_namespaces = [
 
 [vars]
 ALLOWED_ORIGIN = "https://uvyuva.github.io"
-GEMINI_MODEL   = "gemini-flash-latest"
+GEMINI_MODEL   = "gemini-flash-lite-latest"
