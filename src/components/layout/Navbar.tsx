@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         open
           ? "border-b border-white/10 bg-[#050505]"
           : scrolled
@@ -44,7 +44,7 @@ const Navbar = () => {
       }`}
     >
       <div
-        className={`mx-auto flex h-20 max-w-[1200px] items-center justify-between px-6 ${
+        className={`mx-auto flex h-20 max-w-300 items-center justify-between px-6 ${
           scrolled || open ? "" : "[text-shadow:0_1px_16px_rgba(0,0,0,0.45)]"
         }`}
       >
@@ -91,13 +91,13 @@ const Navbar = () => {
       {/* mobile menu overlay — fully opaque */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            className="fixed inset-x-0 bottom-0 top-20 z-40 flex flex-col items-center justify-center gap-8 bg-[#050505] px-6 md:hidden"
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
+            <motion.div
+              className="fixed inset-x-0 bottom-0 top-20 z-40 flex flex-col items-center justify-center gap-8 bg-[#050505] px-6 md:hidden"
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%", transition: { duration: 0.22, ease: [0.4, 0, 1, 1] } }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
             {NAV.map((item) => (
               <a
                 key={item.href}
