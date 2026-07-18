@@ -11,8 +11,9 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import TextRoll from "../common/TextRoll";
-import "@fontsource-variable/roboto-flex";
+import "@fontsource-variable/roboto-flex/index.css";
 import "./styles.css";
+
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
