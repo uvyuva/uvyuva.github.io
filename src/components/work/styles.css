@@ -25,6 +25,7 @@
   margin: 0 auto;
   max-width: 18ch;
 }
+
 /* Sticky-stacking cards */
 .work-cards {
   max-width: 1080px;
@@ -271,5 +272,16 @@
   }
   .work-card {
     top: 0 !important;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 920px) {
+  .work-sticky {
+    align-items: flex-start;
+    padding-top: 96px;              /* clear the fixed navbar + breathing room */
+  }
+  .work-card {
+    top: 0 !important;             /* remove the -5vh upward shift (inline style) */
+    padding: clamp(24px, 2.6vw, 36px);  /* slightly tighter so the card fits shorter screens */
   }
 }

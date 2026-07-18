@@ -13,8 +13,8 @@ const CV_URL = "/cv.pdf";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const BOOT: Record<WhoamiMode, string> = {
-  recruiter: "booting whoami · mode: recruiter · source: résumé ✓",
-  casual: "booting whoami · mode: casual · source: résumé ✓",
+  recruiter: "booting whoami · mode: recruiter · source: resume ✓",
+  casual: "booting whoami · mode: casual · source: resume ✓",
 };
 const GREETING: Record<WhoamiMode, string> = {
   recruiter: "Ask me anything about Yuvaraj's work — I answer only from his resume.",
@@ -181,7 +181,7 @@ const Whoami = ({ open, mode, onClose }: Props) => {
     } catch {
       setMessages((m) =>
         m.map((x) =>
-          x.id === botId ? { ...x, text: "whoami is briefly unavailable — please try again." } : x
+          x.id === botId ? { ...x, text: "whoami is briefly unavailable(Model exhausted) — please try again." } : x
         )
       );
     } finally {
@@ -227,7 +227,7 @@ const Whoami = ({ open, mode, onClose }: Props) => {
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label="whoami — résumé assistant"
+            aria-label="whoami — resume assistant"
             onKeyDown={onTrapKey}
             initial={reduce ? false : { opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -304,7 +304,7 @@ const Whoami = ({ open, mode, onClose }: Props) => {
                 </button>
               </form>
               <div className="wa-note">
-                <span>grounded on resume · AI can error</span>
+                <span>Grounded on resume · AI can error But not My Work</span>
                 {mode === "recruiter" && (
                   <a className="wa-pdf" href={CV_URL} target="_blank" rel="noreferrer">
                     download the PDF ↓

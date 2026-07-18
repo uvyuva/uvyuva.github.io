@@ -70,8 +70,8 @@ Bachelor of Engineering (B.E.), Computer Science —
 Alva's Institute of Engineering and Technology, 2022.
 `.trim();
 
-const NOT_FOUND = "That's not something included in Yuvaraj's résumé.";
-const OFF_TOPIC = "I can only answer questions about Yuvaraj's résumé.";
+const NOT_FOUND = "That's not something included in Yuvaraj's resume.";
+const OFF_TOPIC = "I can only answer questions about Yuvaraj's resume.";
 
 // ---- limits ----
 const MAX_INPUT_CHARS = 500;
@@ -85,7 +85,7 @@ function systemPrompt(mode, vip) {
 You are "whoami", an AI assistant on Yuvaraj P's portfolio.
 
 RULES:
-- For any FACTUAL question about Yuvaraj, use ONLY the RÉSUMÉ SOURCE below. Never invent facts.
+- For any FACTUAL question about Yuvaraj, use ONLY the RESUME SOURCE below. Never invent facts.
   If a factual question isn't answerable from the source, reply exactly: "${NOT_FOUND}"
 - You are NOT a general assistant. Refuse to write code, do math, translate, or discuss
   unrelated topics — reply exactly: "${OFF_TOPIC}"
@@ -94,7 +94,7 @@ RULES:
 
   const modeLine =
     mode === "recruiter"
-      ? `\nMODE: recruiter — professional, confident, impact-first. Answer only résumé questions.`
+      ? `\nMODE: recruiter — professional, confident, impact-first. Answer only resume questions.`
       : `\nMODE: casual — warm and friendly. You MAY exchange brief greetings and small talk` +
         ` (hello, hearing their name, "how are you"), but answer factual questions about` +
         ` Yuvaraj only from the source.`;
@@ -271,14 +271,14 @@ export default {
         body: JSON.stringify(payload),
       });
       if (!r.ok) {
-        return json({ reply: "whoami is briefly unavailable — please try again in a moment." }, 200, cors);
+        return json({ reply: "whoami is briefly unavailable(Model exhausted) — please try again in a moment." }, 200, cors);
       }
       const data = await r.json();
       const reply =
         data?.candidates?.[0]?.content?.parts?.map((p) => p.text).join("").trim() || NOT_FOUND;
       return json({ reply, }, 200, cors);
     } catch {
-      return json({ reply: "whoami is briefly unavailable — please try again in a moment." }, 200, cors);
+      return json({ reply: "whoami is briefly unavailable(Model exhausted) — please try again in a moment." }, 200, cors);
     }
   },
 };

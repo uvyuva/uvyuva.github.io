@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import TextRoll from "../common/TextRoll";
 import { useWhoami } from "../whoami/WhoamiProvider";
+import Logo from "./Logo";
 
 const NAV = [
   { label: "Expertise", href: "#build" },
@@ -50,9 +51,10 @@ const Navbar = () => {
         <a
           href="#hero"
           onClick={() => setOpen(false)}
-          className="text-2xl font-bold tracking-tight text-white"
+          aria-label="Yuvaraj — home"
+          className="inline-flex items-center"
         >
-          UV
+          <Logo />
         </a>
 
         {/* desktop nav */}
