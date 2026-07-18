@@ -1,0 +1,12 @@
+name = "whoami"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# paste the id from `wrangler kv namespace create RL`
+kv_namespaces = [
+  { binding = "RL", id = "9330124c84d342aea90c7b0e01c1d7c9" }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://uvyuva.github.io"
+GEMINI_MODEL   = "gemini-flash-latest"
